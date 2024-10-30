@@ -1,6 +1,7 @@
 const chai = require('chai');
 const assert = chai.assert;
 
+
 suite('Unit Tests', function () {
   suite('Basic Assertions', function () {
     // #1
@@ -22,9 +23,9 @@ test('#isDefined, #isUndefined', function() {
     });
     // #4
     test('#isTrue, #isNotTrue', function () {
-      assert.fail(true, 'true is true');
-      assert.fail(!!'double negation', 'Double negation of a truthy value is true');
-      assert.fail({ value: 'truthy' }, 'Objects are truthy, but are not boolean values');
+      assert.True(true, 'true is true');
+      assert.True(!!'double negation', 'Double negation of a truthy value is true');
+      assert.NotTrue({ value: 'truthy' }, 'Objects are truthy, but are not boolean values');
     });
   });
 
