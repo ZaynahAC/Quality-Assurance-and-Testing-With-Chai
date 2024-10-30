@@ -71,6 +71,8 @@ suite('Functional Tests', function () {
 });
 
 const Browser = require('zombie');
+const browser = new Browser();
+Browser.site = 'http://0.0.0.0:3000'; // Your URL here
 
 suite('Functional Tests with Zombie.js', function () {
   this.timeout(5000);
@@ -98,3 +100,32 @@ suite('Functional Tests with Zombie.js', function () {
     });
   });
 })}); 
+
+
+
+
+const chai = require('chai');
+const expect = chai.expect;
+
+const Browser = require('zombie');
+Browser.localhost('example.com', 3000); // Replace 'example.com' with your app's address
+
+const browser = new Browser();
+describe('Headless browser testing', function() {
+  this.timeout(5000); // Set timeout to allow enough time for the browser to start and load pages
+
+  before(function() {
+    return browser.visit('/'); // Navigate to the root of your local server
+  });
+
+  it('should have a working "site" property', function() {
+    browser.assert.success(); // Check if the page loaded successfully
+  });
+});
+it('should submit forms', function(done) {
+  browser.fill('input[name="s"]', 'search query').pressButton('Search', function() {
+    browser.assert.text('title', 'Search Results'); // Assuming the title tag is updated with search results
+    browser.assert.element('table#results'); // Check if a table with ID 'results' exists
+    done();
+  });
+});
