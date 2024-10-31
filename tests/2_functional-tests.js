@@ -70,16 +70,16 @@ suite('Functional Tests', function () {
     });
 });
 
-suiteSetup (function(done) {
-  return browser.visit('/', done);
-});
-const Browser = require('zombie');
-Browser.site = 'http://0.0.0.0:3000'; //https://e7707466-a5ec-4a47-9814-a314283e3594-00-1ms9nl69mxhwj.spock.replit.dev/ 
+const Browser = require("zombie");
+Browser.site = "https://6573370b-0341-41f8-9594-9d376a008024-00-1a639u8jytrcb.picard.replit.dev/";
 
-suite('Functional Tests with Zombie.js', function () {const browser = new Browser();
+suite('Functional Tests with Zombie.js', function () {
+  const browser = new Browser();
   this.timeout(5000);
-
-
+  
+  suiteSetup(function(done) {
+    return browser.visit('/', done);
+  });
 
   suite('Headless browser', function () {
     test('should have a working "site" property', function() {
@@ -90,15 +90,28 @@ suite('Functional Tests with Zombie.js', function () {const browser = new Browse
   suite('"Famous Italian Explorers" form', function () {
     // #5
     test('Submit the surname "Colombo" in the HTML form', function (done) {
-      assert.fail();
+      browser.fill('surname', 'Colombo')
+      browser.pressButton('submit', function ()
+ 
+           { browser.assert.success()
+            browser.assert.text('span#name', 'Cristoforo');
+            browser.assert.text('span#surname', 'Colombo');
+            browser.assert.elements('span#dates', 1);
 
       done();
     });
-    // #6
-    test('Submit the surname "Vespucci" in the HTML form', function (done) {
-      assert.fail();
 
-      done();
+      suite('"Famous Italian Explorers" form', function () {
+    // #6
+    test('Submit the surname : "Vespucci" in the HTML form', function(done) {
+          browser.fill('surname', 'Vespucci').then(() => {
+            browser.pressButton('submit', () => {
+              browser.assert.success();
+              browser.assert.text('span#name', 'Amerigo');
+              browser.assert.text('span#surname', 'Vespucci');
+              browser.assert.elements('span#dates', 1);
+              done();
+            });
     });
   });
-})}); 
+})})})})});
