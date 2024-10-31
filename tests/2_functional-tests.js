@@ -100,8 +100,6 @@ suite('Functional Tests with Zombie.js', function () {
 
       done();
     });
-
-      suite('"Famous Italian Explorers" form', function () {
     // #6
     test('Submit the surname : "Vespucci" in the HTML form', function(done) {
           browser.fill('surname', 'Vespucci').then(() => {
@@ -114,4 +112,4 @@ suite('Functional Tests with Zombie.js', function () {
             });
     });
   });
-})})})})});
+})})})});
