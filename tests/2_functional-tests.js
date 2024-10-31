@@ -70,11 +70,13 @@ suite('Functional Tests', function () {
     });
 });
 
+suiteSetup (function(done) {
+  return browser.visit('/', done);
+});
 const Browser = require('zombie');
-const browser = new Browser();
-Browser.site = 'http://0.0.0.0:3000'; // Your URL here
+Browser.site = 'http://0.0.0.0:3000'; //https://e7707466-a5ec-4a47-9814-a314283e3594-00-1ms9nl69mxhwj.spock.replit.dev/ 
 
-suite('Functional Tests with Zombie.js', function () {
+suite('Functional Tests with Zombie.js', function () {const browser = new Browser();
   this.timeout(5000);
 
 
@@ -100,59 +102,3 @@ suite('Functional Tests with Zombie.js', function () {
     });
   });
 })}); 
-
-
-
-
-const chai = require('chai');
-const expect = chai.expect;
-
-const Browser = require('zombie');
-Browser.localhost('example.com', 3000); // Replace 'example.com' with your app's address
-
-const browser = new Browser();
-describe('Headless browser testing', function() {
-  this.timeout(5000); // Set timeout to allow enough time for the browser to start and load pages
-
-  before(function() {
-    return browser.visit('/'); // Navigate to the root of your local server
-  });
-
-  it('should have a working "site" property', function() {
-    browser.assert.success(); // Check if the page loaded successfully
-  });
-});
-it('should submit forms', function(done) {
-  browser.fill('input[name="s"]', 'search query').pressButton('Search', function() {
-    browser.assert.text('title', 'Search Results'); // Assuming the title tag is updated with search results
-    browser.assert.element('table#results'); // Check if a table with ID 'results' exists
-    done();
-  });
-});
-
-test('submit "surname" : "Colombo" - write your e2e test...', function(done) {
-  // fill the form...
-  // then submit it pressing 'submit' button.
-  //
-  // in the callback...
-  // assert that status is OK 200
-  // assert that the text inside the element 'span#name' is 'Cristoforo'
-  // assert that the text inside the element 'span#surname' is 'Colombo'
-  // assert that the element(s) 'span#dates' exist and their count is 1
-  browser.fill('surname', 'Colombo').pressButton('submit', function() {
-    /** YOUR TESTS HERE, Don't forget to remove assert.fail() **/
-
-    // pressButton is Async.  Waits for the ajax call to complete...
-
-    // assert that status is OK 200
-    browser.assert.success();
-    // assert that the text inside the element 'span#name' is 'Cristoforo'
-    browser.assert.text('span#name', 'Cristoforo');
-    // assert that the text inside the element 'span#surname' is 'Colombo'
-    browser.assert.text('span#surname', 'Colombo');
-    // assert that the element(s) 'span#dates' exist and their count is 1
-    browser.assert.element('span#dates', 1);
-
-    done(); // It's an async test, so we have to call 'done()''
-  });
-});
